@@ -29,3 +29,5 @@ jobs:
         run: ls -a
       - name: show spider files
         run: cd spider && ls -a
+      - name: show spider/target files
+        run: cd spider && cd target && ls -a
