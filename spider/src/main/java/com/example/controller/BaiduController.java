@@ -17,7 +17,8 @@ public class BaiduController {
 
     @GetMapping("/baidu")
     public ArrayList<String> getByBaidu(String keyword,Integer page) throws InterruptedException {
+        ArrayList<String> result = baiduDriver.searchKeyword(keyword, page);
 
-        return baiduDriver.searchKeyword(keyword,page);
+        return result;
     }
 }

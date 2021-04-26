@@ -73,6 +73,8 @@ public class BaiduService implements SeleniumServiceInterface{
             }
 
         }
+
+        driver.close();
         return reallinks;
     }
 }
