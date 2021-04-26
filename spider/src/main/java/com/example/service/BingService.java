@@ -66,7 +66,7 @@ public class BingService implements SeleniumServiceInterface{
             }
             log.info(reallinks.toString());
         }
-        driver.close();
+        
         return reallinks;
     }
 }

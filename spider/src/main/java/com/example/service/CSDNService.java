@@ -57,7 +57,7 @@ public class CSDNService {
         map.put("content",getContent());
         map.put("author",getAuthor());
         map.put("time",getTime());
-        driver.close();
+        
         return map;
     }
 }

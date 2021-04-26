@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 public class GlobalConfig {
 
     @Bean
-    @Scope("prototype")
+    //@Scope("prototype")
     WebDriver getWebDriver(){
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");

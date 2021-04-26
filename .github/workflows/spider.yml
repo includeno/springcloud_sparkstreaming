@@ -1,6 +1,6 @@
 # https://docs.github.com/en/actions/guides
 # CI name , it will display on github's action page menu
-name: SpringBootDemo
+name: 打包并发布SpringCloud Spider
 # trigger on which this CI should be run
 on: # push operation is operate
   push:
