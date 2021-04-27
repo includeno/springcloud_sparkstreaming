@@ -43,7 +43,7 @@ public class GooleService implements SeleniumServiceInterface{
             driver.get(baselink);
             Integer random=new Random(5).nextInt();
             try {
-                TimeUnit.MILLISECONDS.sleep(234*random+1000 );
+                TimeUnit.MILLISECONDS.sleep(234*random+1500 );
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

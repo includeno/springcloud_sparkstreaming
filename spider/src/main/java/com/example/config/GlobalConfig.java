@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.AppMain;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,13 +12,20 @@ import org.springframework.context.annotation.Scope;
 public class GlobalConfig {
 
     @Bean
-    //@Scope("prototype")
     WebDriver getWebDriver(){
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
-        chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("--disable-gpu");
-        chromeOptions.addArguments("--disable-dev-shm-usage");
+        if(AppMain.isLinux()){
+            chromeOptions.addArguments("--headless");
+            chromeOptions.addArguments("--no-sandbox");
+            chromeOptions.addArguments("--disable-gpu");
+            chromeOptions.addArguments("--disable-dev-shm-usage");
+        }
+        if(AppMain.isWindows()){
+            chromeOptions.addArguments("--no-sandbox");
+            chromeOptions.addArguments("--disable-gpu");
+            chromeOptions.addArguments("--disable-dev-shm-usage");
+        }
+
 
         //设置为 headless 模式 （必须）
         //chromeOptions.addArguments("--headless");

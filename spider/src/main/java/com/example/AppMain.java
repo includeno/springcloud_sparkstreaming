@@ -7,9 +7,23 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 public class AppMain {
 
-    public static void main(String[] args) {
+    public static boolean isLinux() {
+        return System.getProperty("os.name").toLowerCase().contains("linux");
+    }
 
-        System.setProperty("webdriver.chrome.driver", "/tools/chromedriver");//linux
+    public static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
+
+    public static void main(String[] args) {
+        if(isLinux()){
+            System.setProperty("webdriver.chrome.driver", "/tools/chromedriver");//linux
+        }
+        if(isWindows()){
+            System.setProperty("webdriver.chrome.driver", "C:\\EnvironmentSoftwares\\chromedriver_win32\\chromedriver.exe");//linux
+        }
+
         SpringApplication.run(AppMain.class, args);
     }
 
