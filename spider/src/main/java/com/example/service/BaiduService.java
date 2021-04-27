@@ -33,6 +33,7 @@ public class BaiduService implements SeleniumServiceInterface{
         for(int i=0;i<page;i++){
             int pn = page * 10 + 1;
             baselink="http://www.baidu.com/s?wd="+keyword+"&pn="+pn+"&cl=3&rn=100";
+            System.out.println("baselink:"+baselink);
             urlList.add(baselink);
         }
 

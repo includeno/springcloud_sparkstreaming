@@ -35,6 +35,7 @@ public class BingService implements SeleniumServiceInterface{
         for(int i=0;i<page;i++){
             int pn = page * 10 + 1;
             baselink="https://cn.bing.com/search?q="+keyword+"&first="+pn+"&FORM=PORE";
+            System.out.println("baselink:"+baselink);
             urlList.add(baselink);
         }
 

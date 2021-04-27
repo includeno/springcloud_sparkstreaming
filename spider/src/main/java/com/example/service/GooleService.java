@@ -35,6 +35,7 @@ public class GooleService implements SeleniumServiceInterface{
             int pn = page * 10 ;
             baselink="https://www.google.com.hk/search?q="+keyword+"&start="+pn+"";
             urlList.add(baselink);
+            System.out.println("baselink:"+baselink);
         }
 
         ArrayList<String> reallinks=new ArrayList<>();
