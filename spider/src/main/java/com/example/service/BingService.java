@@ -42,20 +42,14 @@ public class BingService implements SeleniumServiceInterface{
         ArrayList<String> reallinks=new ArrayList<>();
         for(String link:urlList){
             driver.get(baselink);
-            Integer random=new Random(5).nextInt();
+            Integer random = new Random(9).nextInt();
             try {
-                TimeUnit.MILLISECONDS.sleep(234*random+1500 );
+                TimeUnit.MILLISECONDS.sleep(2072+random*123);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            //显式等待， 针对某个元素等待
-            WebDriverWait wait = new WebDriverWait(driver,30,1);
-            wait.until(new ExpectedCondition<WebElement>(){
-                @Override
-                public WebElement apply(WebDriver text) {
-                    return text.findElement(By.id("sb_form_q"));
-                }
-            });
+            
+
             List<WebElement> links = driver.findElements(By.className("b_algo"));
 
             //TimeUnit.MILLISECONDS.sleep(263*random );

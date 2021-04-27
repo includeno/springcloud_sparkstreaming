@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @Configuration
 public class GlobalConfig {
 
@@ -21,9 +24,11 @@ public class GlobalConfig {
             chromeOptions.addArguments("--disable-dev-shm-usage");
         }
         if(AppMain.isWindows()){
+            chromeOptions.addArguments("--headless");
             chromeOptions.addArguments("--no-sandbox");
             chromeOptions.addArguments("--disable-gpu");
             chromeOptions.addArguments("--disable-dev-shm-usage");
+            chromeOptions.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
         }
 
 
