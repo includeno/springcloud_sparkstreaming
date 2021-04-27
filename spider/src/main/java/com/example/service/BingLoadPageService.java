@@ -5,6 +5,8 @@ import okhttp3.OkHttpClient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,36 +32,38 @@ public class BingLoadPageService implements SeleniumServiceInterface {
         String baselink = "https://www.bing.com/?mkt=zh-CN";
         driver.get(baselink);
 
-        {
-            Integer random = new Random(9).nextInt();
-            try {
-                TimeUnit.MILLISECONDS.sleep(1072 + random * 123);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        Integer random = new Random(9).nextInt();
+        try {
+            TimeUnit.MILLISECONDS.sleep(1072 + random * 123);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //显式等待， 针对某个元素等待
+        WebDriverWait wait = new WebDriverWait(driver, 30, 1);
+        WebElement searchInput = wait.until(new ExpectedCondition<WebElement>() {
+            @Override
+            public WebElement apply(WebDriver text) {
+                return text.findElement(By.id("sb_form_q"));
             }
-            WebElement searchInput = driver.findElement(By.id("sb_form_q"));
-            searchInput.sendKeys(keyword);
-
+        });
+        searchInput.sendKeys(keyword);
+        {
             //确认按钮 id sb_form_go
             WebElement submitButton = driver.findElement(By.id("sb_form_go"));
             submitButton.click();
-
             log.info("当前位置:" + driver.getCurrentUrl());
-
         }
 
         ArrayList<String> reallinks = new ArrayList<>();
         for (int i = 0; i < page; i++) {
 
-            Integer random = new Random(5).nextInt();
             try {
                 TimeUnit.MILLISECONDS.sleep(234 * random + 1350);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             List<WebElement> links = driver.findElements(By.className("b_algo"));
-            //TimeUnit.MILLISECONDS.sleep(263*random );
+
             for (WebElement element : links) {
                 WebElement classa = element.findElement(By.tagName("a"));
                 String href = classa.getAttribute("href");
