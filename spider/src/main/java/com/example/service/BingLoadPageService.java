@@ -2,9 +2,7 @@ package com.example.service;
 
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +45,8 @@ public class BingLoadPageService implements SeleniumServiceInterface {
             }
         });
         searchInput.sendKeys(keyword);
-        {
-            //确认按钮 id sb_form_go
-            WebElement submitButton = driver.findElement(By.id("sb_form_go"));
-            submitButton.click();
-            log.info("当前位置:" + driver.getCurrentUrl());
-        }
+        searchInput.sendKeys(Keys.ENTER);
+        log.info("当前位置:" + driver.getCurrentUrl());
 
         ArrayList<String> reallinks = new ArrayList<>();
         for (int i = 0; i < page; i++) {
@@ -74,7 +68,9 @@ public class BingLoadPageService implements SeleniumServiceInterface {
 
             //翻页 class sb_pagN
             WebElement nextPage = driver.findElement(By.className("sb_pagN"));
-            nextPage.click();
+            JavascriptExecutor driver_js= ((JavascriptExecutor) driver);
+            driver_js.executeScript("arguments[0].click();",nextPage);
+
         }
 
         return reallinks;

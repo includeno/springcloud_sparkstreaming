@@ -24,7 +24,7 @@ public class BingController {
         return bingDriver.searchKeyword(keyword,page);
     }
 
-    @GetMapping("/bing2")
+    @GetMapping("/bingpage")
     public ArrayList<String> getByBing2(String keyword, Integer page) throws InterruptedException {
 
         return bingLoadPageService.searchKeyword(keyword,page);

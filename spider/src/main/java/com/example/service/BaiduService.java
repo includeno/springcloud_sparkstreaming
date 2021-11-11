@@ -4,8 +4,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +42,10 @@ public class BaiduService implements SeleniumServiceInterface{
         ArrayList<String> reallinks=new ArrayList<>();
         for(String link:urlList){
             driver.get(baselink);
+
             Integer random=new Random(5).nextInt();
             try {
-                TimeUnit.MILLISECONDS.sleep(234*random+1500 );
+                TimeUnit.MILLISECONDS.sleep(1008*random+new Random(600).nextInt() );
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -54,22 +57,28 @@ public class BaiduService implements SeleniumServiceInterface{
                     return text.findElement(By.id("kw"));
                 }
             });
+            Actions action = new Actions(driver);
+            for(int i=0;i<new Random(9).nextInt();i++){
+                action.keyDown(Keys.ARROW_DOWN);
+            }
+
             //driver.findElement(By.id("kw"));
             List<WebElement> links = driver.findElements(By.className("t"));
 
-            //TimeUnit.MILLISECONDS.sleep(263*random );
             for(WebElement element:links){
                 WebElement classa = element.findElement(By.tagName("a"));
                 String href=classa.getAttribute("href");
+
 
                 Request request = new Request.Builder().url(href).build();
                 try {
                     Response response = client.newCall(request).execute();
                     System.out.println(response.request().url().toString());
                     reallinks.add(response.request().url().toString());
+                    response.close();
                 } catch (IOException e) {
                     continue;
-                    //reallinks.add("");
+
                 }
             }
 
